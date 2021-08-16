@@ -36,14 +36,12 @@ public class Solution {
                     }
                     continue;
                 }
+
                 if (capability >= product.getWeight()) {
-                    if (product.getValue() >= memo[i - 1][j]) {
-                        memo[i][j] = product.getValue();
-                    } else {
-                        memo[i][j] = memo[i - 1][j];
-                    }
                     if (product.getValue() + memo[i - 1][capability - product.getWeight()] >= memo[i - 1][j]) {
                         memo[i][j] = product.getValue() + memo[i - 1][capability - product.getWeight()];
+                    } else {
+                        memo[i][j] = memo[i - 1][j];
                     }
                 } else {
                     memo[i][j] = memo[i - 1][j];
