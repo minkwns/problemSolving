@@ -16,8 +16,9 @@ public class Solution {
         st = new StringTokenizer(br.readLine());
 
         String partialStr = st.nextToken();
-        if (originalStr.equals(partialStr)) {
-            System.out.println("1");
+
+        if (partialStr.length() > originalStr.length()) {
+            System.out.println("0");
             return;
         }
 
@@ -27,30 +28,31 @@ public class Solution {
         for (int i = 1; i < table.length; i++) {
             String subStr =partialStr.substring(0, i);
             int cnt = 0;
-            while (subStr.length() >= 2) {
-                if (subStr.charAt(0) == subStr.charAt(subStr.length() - 1)) {
+            while (subStr.length() / 2 > cnt) {
+                if (subStr.charAt(cnt) == subStr.charAt(subStr.length() - 1 - cnt)) {
                     cnt ++;
+                } else {
+                    break;
                 }
-                subStr = subStr.substring(1, subStr.length() - 1);
             }
             table[i] = cnt;
         }
 
-        String compareStr = originalStr.substring(0, partialStr.length());
 
-        System.out.println(compareStr);
+        for (int i = 0; i < originalStr.length(); i++) {
+            int cnt = 0;
+            while (i + cnt < originalStr.length() &&
+                    originalStr.charAt(i + cnt) == partialStr.charAt(cnt)) {
 
-        if (originalStr.indexOf(partialStr) >= 1) {
-            System.out.println("1");
-            return;
-        } else {
-            if (originalStr.substring(0, partialStr.length()).equals(partialStr)) {
-                System.out.println("1");
-                return;
+                cnt++;
+                if (cnt == partialStr.length()) {
+                    System.out.println("1");
+                    return;
+                }
             }
-            System.out.println("0");
+            i = i + cnt - table[cnt] - 1;
         }
-
-
+        System.out.println("0");
+        return;
     }
 }
