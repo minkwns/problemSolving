@@ -18,7 +18,6 @@ public class Main {
 
         int area = 0;
 
-        Stack<Integer> flag = new Stack<>();
         for (int i = 0; i < arr.length; i++) {
             area += findDepth(arr, i);
         }
