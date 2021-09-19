@@ -46,7 +46,7 @@ public class Solution {
 
              if (firstNode.getRoads().containsKey(secondNode)) {
                  if (weight < firstNode.getRoads().get(secondNode)) {
-                     firstNode.getRoads().replace(secondNode, weight);
+                     firstNode.getRoads().put(secondNode, weight);
                  }
              } else {
                  firstNode.addRoad(secondNode, weight);
